@@ -31,13 +31,14 @@ func (i *itemsController) Create(w http.ResponseWriter, r *http.Request) {
 	var itemRequest items.Item
 	requestBody, err := ioutil.ReadAll(r.Body)
 	if err != nil {
-		http_utils.RespondError(w, *rest_errors.NewBadRequestError("invalid json body"))
+		http_utils.RespondError(w, *rest_errors.NewBadRequestError("invalid request body"))
 		return
 	}
 
 	defer r.Body.Close()
+
 	if err := json.Unmarshal(requestBody, &itemRequest); err != nil {
-		http_utils.RespondError(w, *rest_errors.NewBadRequestError("invalid json body"))
+		http_utils.RespondError(w, *rest_errors.NewBadRequestError("invalid item json body"))
 		return
 	}
 	itemRequest.Seller = oauth.GetCallerID(r)
