@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/voicurobert/bookstore_items-api/domain/items"
 	"github.com/voicurobert/bookstore_items-api/services"
 	"github.com/voicurobert/bookstore_items-api/utils/http_utils"
@@ -41,6 +42,7 @@ func (i *itemsController) Create(w http.ResponseWriter, r *http.Request) {
 		http_utils.RespondError(w, *rest_errors.NewBadRequestError("invalid item json body"))
 		return
 	}
+	fmt.Println(itemRequest)
 	itemRequest.Seller = oauth.GetCallerID(r)
 
 	result, createErr := services.ItemsService.Create(itemRequest)
