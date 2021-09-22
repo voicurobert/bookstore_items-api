@@ -10,6 +10,7 @@ var (
 )
 
 func init() {
+
 	logConfig := zap.Config{
 		OutputPaths: []string{"stdout"},
 		Level:       zap.NewAtomicLevelAt(zap.InfoLevel),
